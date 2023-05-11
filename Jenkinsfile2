@@ -20,7 +20,7 @@ pipeline {
     }
      stage('Docker Image Build') {     
         steps {
-              sh 'sudo docker build -t demo-image . '
+              sh 'sudo docker build -t test-image . '
                }
              }
         stage('Docker image push') {
@@ -28,9 +28,9 @@ pipeline {
                 // sh 'aws ecr get-login-password --region ap-south-1 | sudo docker login --username AWS --password-stdin 738275578260.dkr.ecr.ap-south-1.amazonaws.com'
                  withCredentials([usernamePassword(credentialsId: '4a962f6c-4031-4c48-b457-122f64f61fb0', passwordVariable: 'Password', usernameVariable: 'Username')]) {
                  sh "sudo docker login -u ${env.Username} -p ${env.Password}"
-                 sh "sudo docker image tag demo-image demo-image:${BUILD_NUMBER}"
-                 sh "sudo docker image tag demo-image vysakhpanilkumar/demo-image:${BUILD_NUMBER}"
-                 sh "sudo docker image push vysakhpanilkumar/demo-image:${BUILD_NUMBER}" 
+                 sh "sudo docker image tag demo-image test-image:${BUILD_NUMBER}"
+                 sh "sudo docker image tag demo-image vysakhpanilkumar/test-image:${BUILD_NUMBER}"
+                 sh "sudo docker image push vysakhpanilkumar/test-image:${BUILD_NUMBER}" 
                } 
              }  
           }
